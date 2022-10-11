@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string.h>
+#include <string>
 #include <stack>
 
 
@@ -35,12 +35,7 @@ class USBConnection
             }
             
         }
-        USBConnection()
-        {
-            ID = ids.top();
-            ids.pop();
-        }
-
+       
         ~USBConnection()
         {
             ids.push(ID);  

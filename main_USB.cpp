@@ -1,7 +1,47 @@
 #include <iostream>
 #include <stack> //for list of ids
-#include "USBConnection.cpp"
+#include <string>
+
 using namespace std;
+
+class USBConnection
+{
+    private:
+        int ID;
+        static stack<int> ids;
+        USBConnection(int id)
+        {
+            ID = id;
+        }
+    public:
+
+        int get_id()
+        {
+            return ID;
+        }
+
+        static USBConnection* CreateUsbConnection()
+        {
+            if(ids.size()>0)
+            {
+                int id = USBConnection::ids.top();
+                USBConnection::ids.pop();
+                USBConnection *newConnection = new USBConnection(id);
+                return newConnection;
+            }
+            else{
+                return NULL;
+            }
+            
+        }
+       
+        ~USBConnection()
+        {
+            ids.push(ID);  
+        }
+};
+
+stack<int> USBConnection::ids({3, 2, 1});
 
 int main(){
     int max_usb_ports = 10;
